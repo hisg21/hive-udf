@@ -57,14 +57,30 @@ public class UDFStrToDate extends UDF {
     
     Text result = new Text();
     Text lastPatternText = new Text();
-    
+
+    private String reform(String patternStr) {
+        if (patternStr == null) {
+            return null;
+        }
+
+        return patternStr.replaceAll("[yY]", "y").replaceAll("[mM]", "M").replaceAll("[dD]", "d");
+    }
+
+    private Text reform(Text patternText) {
+        return new Text(reform(patternText.toString()));
+    }
+
     public Text evaluate(Text dateText, Text patternText) {
         if (dateText == null || patternText == null) {
             return null;
         }
+
+        patternText = reform(patternText);
+
         try {
             if (!patternText.equals(lastPatternText)) {
                 formatter.applyPattern(patternText.toString());
+//                formatter.applyPattern(reform(patternText.toString()));
                 lastPatternText.set(patternText);
             }
         } catch (Exception e) {
@@ -80,7 +96,7 @@ public class UDFStrToDate extends UDF {
             return null;
         }
     }
-    
+
     Text t = new Text();
     
     public Text evaluate(Text dateText, Text patternText, IntWritable days) {

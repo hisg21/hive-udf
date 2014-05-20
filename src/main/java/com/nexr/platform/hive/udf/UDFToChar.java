@@ -224,11 +224,26 @@ public class UDFToChar extends UDF {
 			return result;
 		}
 	}
-	
+
+    private String reform(String patternStr) {
+        if (patternStr == null) {
+            return null;
+        }
+
+        return patternStr.replaceAll("[yY]", "y").replaceAll("[mM]", "M").replaceAll("[dD]", "d");
+    }
+
+    private Text reform(Text patternText) {
+        return new Text(reform(patternText.toString()));
+    }
+
 	public Text evaluate(Text dateText, Text patternText) {
 		if (dateText == null || patternText == null) {
 			return null;
 		}
+
+        patternText = reform(patternText);
+
 		if (dateText.toString().trim().length()==10){
 			standardFormatter.applyPattern("yyyy-MM-dd");
 		}
@@ -255,5 +270,4 @@ public class UDFToChar extends UDF {
 	public Text evaluate(Text text){
 		return text;
 	}
-	
 }
