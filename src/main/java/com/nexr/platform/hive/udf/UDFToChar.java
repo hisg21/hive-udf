@@ -46,7 +46,6 @@ import org.apache.hive.pdk.HivePdkUnitTests;
  * This function is an alternative to Oracle to_char function.
  */
 
-@UDFType(deterministic = false)
 @Description(name = "to_char",
 		value = "_FUNC_(date, pattern)  converts a string with yyyy-MM-dd HH:mm:ss pattern " +
 				"to a string with given pattern.\n"

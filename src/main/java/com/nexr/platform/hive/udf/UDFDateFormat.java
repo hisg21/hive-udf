@@ -55,7 +55,6 @@ import org.apache.hive.pdk.HivePdkUnitTests;
 	}
 )
 
-@UDFType(deterministic = false)
 public class UDFDateFormat extends UDF {
 	private final SimpleDateFormat standardFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private final SimpleDateFormat formatter = new SimpleDateFormat();

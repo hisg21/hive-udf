@@ -44,7 +44,6 @@ import org.apache.hive.pdk.HivePdkUnitTests;
         @HivePdkUnitTest(query = "SELECT nexr_str_to_date('2011/07/21 12:55:11','yyyy/MM/dd HH:mm:ss') "
                 + "FROM onerow;", result = "2011-07-21 12:55:11"),
         @HivePdkUnitTest(query = "SELECT nexr_str_to_date('2011/05/01','yyyy/MM/dd', 1) FROM onerow;", result = "2011-05-02 00:00:00")})
-@UDFType(deterministic = false)
 public class UDFStrToDate extends UDF {
     private final SimpleDateFormat standardFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private final SimpleDateFormat formatter = new SimpleDateFormat();
